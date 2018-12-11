@@ -1,0 +1,25 @@
+name: ttygif
+base: core18 # the base snap is the execution environment for this snap
+version: git
+summary:  Convert terminal recordings to animated gifs
+description: |
+  ttygif takes recordings made by ttyrec and converts them into 
+  animated gifs.
+
+grade: stable
+confinement: strict
+
+parts:
+  ttygif:
+    plugin: make
+    make-parameters: ["PREFIX=$SNAPCRAFT_PART_INSTALL/usr"]
+    source: .
+    build-packages:
+      - gcc
+
+apps:
+  ttygif:
+    command: usr/bin/ttygif
+    plugs:
+      - home
+      - removable-media
